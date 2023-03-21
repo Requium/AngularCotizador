@@ -1,0 +1,56 @@
+.bg-dark{
+
+    background-color: rgb(41, 41, 41)
+}
+
+
+mat-sidenav{
+    min-width: 15%;
+    resize: none;
+    background-color: rgb(41, 41, 41)
+}
+/* mat-expansion-panel:active,
+mat-expansion-panel:hover{
+    background-color:rgba(230, 91, 10, 0.911)
+} */
+mat-expansion-panel-header{
+    background-color: rgb(41, 41, 41) 
+}
+mat-expansion-panel{
+    background-color: rgb(255, 150, 14);
+    font-weight: bold
+}
+.nav-expansion-li2{
+    display:block;
+    padding: 12px 12px 12px 28px
+}
+.nav-expansion-li2:hover{
+    background-color: rgb(255, 150, 14);
+    
+    font-size: 1.05em;
+   
+}
+.nav-expansion-h1{
+    color:white;
+}
+.container-content{
+    min-height: 100vh
+}
+
+.app-navbar{
+    color:white
+}
+
+a {
+    color:white;
+    text-decoration: none !important;
+}
+
+:host /deep/ .mat-expansion-panel .mat-expansion-panel-body {
+    padding: 0px 0px 0px 0px;
+    background-color:rgb(41, 41, 41) 
+}
+
+:host /deep/ .mat-expansion-panel .mat-expansion-indicator:after {
+        color:white
+}

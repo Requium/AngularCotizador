@@ -1,0 +1,28 @@
+.panel-default {
+    display: flex;
+    flex-direction: column;
+    padding-top:5%
+  }
+  
+  .panel-default > * {
+    width: 50%;
+    align-self:center;
+  
+  }
+
+  mat-horizontal-stepper{
+    min-width: 95vw;
+    max-width: 100vw;
+  }
+  .movimientoAtrasAdelante{ 
+    display: flex;
+    justify-content: space-between;
+
+  }
+  .movimientoAdelante{
+    float:right;
+  }
+
+  .button-form{
+    text-align: center
+}

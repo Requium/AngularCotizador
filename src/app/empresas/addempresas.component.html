@@ -1,0 +1,44 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<form [formGroup]="clienteForm" novalidate>
+<div class="panel panel-default" [formGroup]="clienteForm">
+    <mat-form-field>
+      <input matInput placeholder="Nombre de Empresa" formControlName="empresa" required name="nombre" [(ngModel)]="empresa.nombre">
+      <mat-error *ngIf="this.clienteForm.get('empresa').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Nombre de Encargado" formControlName="encargado"  required name="encargado" [(ngModel)]="empresa.encargado">
+        <mat-error *ngIf="this.clienteForm.get('encargado').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Siglas de la Empresa" formControlName="siglas"  required name="siglas" [(ngModel)]="empresa.siglas">
+        <mat-error *ngIf="this.clienteForm.get('siglas').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Email"  formControlName="email"  required  name="email" [(ngModel)]="empresa.email">
+            <mat-error *ngIf="this.clienteForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Direccion de la Empresa" formControlName="direccion"  required name="direccion" [(ngModel)]="empresa.direccion"></textarea>
+        <mat-error *ngIf="this.clienteForm.get('direccion').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Telefono" formControlName="telefono" type="number" required name="telefono" [(ngModel)]="empresa.telefono">
+        <mat-error *ngIf="this.clienteForm.get('telefono').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Razon Social" formControlName="razonsocial" required name="razonsocial" [(ngModel)]="empresa.razonsocial">
+        <mat-error *ngIf="this.clienteForm.get('razonsocial').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="NIT" formControlName="nit" type="number" required name="nit" [(ngModel)]="empresa.nit">
+        <mat-error *ngIf="this.clienteForm.get('nit').invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+<app-datepicker></app-datepicker>
+  </div>
+  <div class="button-form" *ngIf="this.edit == false"><button mat-raised-button color="primary" [disabled]="!clienteForm.valid" (click)="save()">Agregar</button></div>
+  <div class="button-form" *ngIf="this.edit == true">
+    <button mat-raised-button color="primary" *ngIf="this.edited == false" (click)="enableEdit()">Editar</button>
+    <button mat-raised-button color="primary" *ngIf="this.edited == true" (click)="update()" [disabled]="!clienteForm.valid">Guardar</button>
+    <span style="display:inline-block; width:5%" *ngIf="this.edited == true"><button mat-raised-button color="primary" (click)="enableEdit()">Cancelar</button></span></div>
+
+</form>

@@ -1,0 +1,47 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div *ngIf="!cotizacion" class="panel panel-default">
+  <form>
+    <mat-form-field class="form-full-width">
+      <input matInput placeholder="Productos a Buscar" name="buscador" [(ngModel)]="busqueda" class="autocomplete">
+    </mat-form-field>  
+    <div class="button-form">
+      <button mat-raised-button color="primary" (click)="mostrarProductos()" >Mostrar</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="cotizacion" class="panel panel-default">
+    <form>
+        <mat-form-field class="form-full-width">
+          <input matInput placeholder="Producto a Buscar" aria-label="Empresa" [matAutocomplete]="auto" [formControl]="stateCtrl" required class="autocomplete">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let producto of filteredProductos | async" (onSelectionChange)="selectProducto(producto)" [value]="producto.modelo">
+              <img style="vertical-align:middle; width:10%; height:15%" [src]="producto.imagen" alt=""> |
+              <small>{{producto.modelo }}</small> |
+              <small>{{producto.marca}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <br />
+      </form>
+      <div class="button-form" *ngIf="cotizacion"><button mat-raised-button color="primary" [disabled]="!selectedProducto" (click)="addProductoToTable()">Agregar</button></div>
+    </div>
+   
+    <hr>
+    <div *ngIf="!cotizacion&&dataProductos"> 
+        <app-buscador-productos [productos]="dataProductos"></app-buscador-productos>
+    </div>
+    <span class="panel panel-default" *ngIf="selectedProducto && !cotizacion" >
+      
+      <app-addproducto [producto]="selectedProducto"></app-addproducto>
+    </span>
+    <div *ngIf="cotizacion&&data.length!==0" class="data-table">
+      <div class=factura>
+        <mat-checkbox [(ngModel)]="facturaVenta" (change)="onFacturaVenta($event)">Venta con factura</mat-checkbox>
+      </div>
+      <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onSave($event)" (deleteConfirm)="onDelete($event)"></ng2-smart-table> 
+      <div class="totalParent">
+        <div class="total">TOTAL COMPRA:{{totalCompra}} Bs</div> <div class="total">TOTAL Impuestos: {{impuestoFacturaIVA}}IVA + {{ITVenta}}IT <br> TOTAL Utilidad:{{utilidad}} <br> Credito Fiscal: {{creditoFiscal}}  </div> <div class="total">TOTAL:{{total}} Bs</div>
+      </div>
+    
+    </div>

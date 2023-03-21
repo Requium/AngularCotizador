@@ -1,0 +1,62 @@
+<header class="header-nav-container">    
+        <ul class="nav nav-tabs bg-dark">
+                <a href="#" class="navbar-brand">
+                    <li>
+                    <p style="display:inline-block;color:rgb(255, 150, 14)">TERA</p><p style="display:inline-block;color:white">COM</p>
+            </li>
+        </a>
+        </ul>      
+</header>
+
+<mat-sidenav-container class="side-nav-container" >
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" fullscreen="false">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header class="specific-class">
+                    <mat-panel-title>
+                        <p class="nav-expansion-h1">Clientes</p> 
+                    </mat-panel-title>              
+                </mat-expansion-panel-header>
+                <a [routerLink]="['/agregarempresa']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Nuevo Cliente</li></a>
+                <a [routerLink]="['/modificarempresa']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Modificar Cliente</li></a>              
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p class="nav-expansion-h1">Productos</p> 
+                    </mat-panel-title>              
+                </mat-expansion-panel-header>
+                <a [routerLink]="['/agregarproducto']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Agregar Producto</li></a>
+                <a [routerLink]="['/modificarproducto']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Modificar Producto</li></a>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p class="nav-expansion-h1">Ordenes</p> 
+                    </mat-panel-title>              
+                </mat-expansion-panel-header>
+                <a [routerLink]="['/agregarcotizacion']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Nueva Cotizacion</li></a>
+                <a [routerLink]="['/modificarcotizacion']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Editar Cotizacion</li></a>
+                <a [routerLink]="['/agregarnotaentrega']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Nueva Nota de Entrega</li></a>
+                <a [routerLink]="['/modificarnotaentrega']" (click)="sidenav.toggle()"><li class="nav-expansion-li2">Editar Nota de Entrega</li></a>
+                <a href="#"><li class="nav-expansion-li2" (click)="sidenav.toggle()">Seguimiento de Ordenes</li></a>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p class="nav-expansion-h1">Usuarios</p> 
+                    </mat-panel-title>              
+                </mat-expansion-panel-header>
+                <a href="#"><li class="nav-expansion-li2" (click)="sidenav.toggle()">Agregar Usuario</li></a>
+                <a href="#"><li class="nav-expansion-li2" (click)="sidenav.toggle()">Modificar Usuario</li></a>            
+            </mat-expansion-panel>                   
+        </mat-accordion>       
+    </mat-sidenav>
+    <mat-sidenav-content class="container-content" >
+        <p><button mat-raised-button color="primary"  (click)="sidenav.toggle()"><i class="material-icons">menu</i> Menu</button></p>
+
+        <!-- <div class="container-content"> -->
+        <router-outlet></router-outlet>
+        <!-- </div> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>

@@ -1,0 +1,67 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div class="panel panel-default">
+    <mat-form-field>
+      <input matInput placeholder="Modelo del producto" [formControl]="modelo" name="modelo" [(ngModel)]="producto.modelo">
+      <mat-error *ngIf="this.modelo.invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Descripcion del producto" [formControl]="descripcion" name="descripcion" [(ngModel)]="producto.descripcion"></textarea>
+        <mat-error *ngIf="this.descripcion.invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+        <mat-form-field>
+        <mat-select [(ngModel)]="producto.garantia" placeholder="Garantia">
+          <mat-option value="0M">0 Meses</mat-option>
+          <mat-option value="1M">1 Mes</mat-option>
+          <mat-option value="2M">2 Meses</mat-option>
+          <mat-option value="3M">3 Meses</mat-option>
+          <mat-option value="6M">6 Meses</mat-option>
+          <mat-option value="8M">8 Meses</mat-option>
+          <mat-option value="12M">12 Meses</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <div class="file-upload">
+        <label for="Imagen">Imagen</label>    <br>
+        <button mat-raised-button color="primary" onclick="document.getElementById('custom-input').click()">Seleccionar Archivo</button>
+        <input  id="custom-input" type="file" accept="image/*" (change)="fileListener($event)" style="display:none">
+    
+    <span class="result rounded" *ngIf="imageReturn||edited === true">
+        <img [src]="imageReturn" [width]=imgWidth [height]=imgHeight [style.max-width.px]="imgWidth" [style.max-height.px]="imgHeight" id="myImg">
+       </span>
+    </div>
+    <mat-form-field>
+        <input matInput placeholder="Precio de compra" type="number" [formControl]="precioc"  class="amount-right-align" name="precioc" [(ngModel)]="producto.precioc">          
+        <span matSuffix>Bs&nbsp;</span>
+        <mat-error *ngIf="this.precioc.invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Precio de venta" type="number"  class="amount-right-align" name="preciov" [(ngModel)]="producto.preciov">          
+        <span matSuffix>Bs&nbsp;</span>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select [(ngModel)]="producto.unidad" placeholder="Unidad">
+          <mat-option value="pieza">Pieza</mat-option>
+          <mat-option value="metros">Metros</mat-option>
+          <mat-option value="horas">Horas</mat-option>
+          <mat-option value="piezaSN">Pieza Sin Serie</mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Area de producto" [formControl]="area" name="area" [(ngModel)]="producto.area">
+        <mat-error *ngIf="this.modelo.invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Marca del Producto" [formControl]="marca"  name="marca" [(ngModel)]="producto.marca">
+        <mat-error *ngIf="this.marca.invalid">Tiene que ingresar Algo!</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Proveedor"  name="proveedor"  [(ngModel)]="producto.proveedor">
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]='producto.servicio'>Servicio</mat-checkbox>
+  </div>
+  <div class="button-form">
+      <button mat-raised-button color="primary" *ngIf="this.edited == false" [disabled]="this.modelo.invalid||this.descripcion.invalid||this.marca.invalid||this.precioc.invalid == true" (click)="saveProducto()" >Agregar</button>
+      <button mat-raised-button color="primary" *ngIf="this.edited == true" [disabled]="this.modelo.invalid||this.descripcion.invalid||this.marca.invalid||this.precioc.invalid == true" (click)="update()">Actualizar</button>
+</div>

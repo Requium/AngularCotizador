@@ -1,0 +1,51 @@
+<section class="mat-typography">
+  <h1>Generar Nota de entrega</h1>
+</section>
+<mat-horizontal-stepper [linear]="isLinear" id="stepper">
+    <mat-step label="Seleccionar Empresa" [completed]="step1Completed">
+      <app-empresas [accion]="notaEntrega.accion" (notaClick)='onNotaClick($event)'></app-empresas>
+    </mat-step>
+    <mat-step [completed]="step2Completed" >
+      <form>
+        <ng-template matStepLabel>Agregar Productos</ng-template>
+        <div *ngIf=notaEntrega.cotizacionID>
+          <app-notas [notaEntrega]="notaEntrega" (editNotas)='onEditNotas($event)' (notasForm)='onNotasForm($event)' ></app-notas>
+        </div>
+        <div class="movimientoAtrasAdelante">
+          <button mat-button matStepperPrevious (click)="retroceder()">Atras</button>
+          <button mat-button matStepperNext *ngIf="this.nextButton2 !== false">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Generar Nota</ng-template>
+      <div class="panel panel-default">
+        <mat-form-field>
+          <input matInput [formControl]="notasFormControl" type="text" placeholder="Notas" [(ngModel)]="notas" name="notas" required>
+          <mat-error *ngIf="notasFormControl.hasError('required')">
+            Este campo es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]='EncargadoEntrega'>Agregar Encargado de entrega</mat-checkbox>
+        <mat-form-field *ngIf="EncargadoEntrega === true">
+          <input matInput [formControl]="encargadoEntregaFormControl" type="text" [(ngModel)]="encargadoEntrega" placeholder="Nombre del Encargado de Entrega " required >
+          <mat-error *ngIf="encargadoEntregaFormControl.hasError('required')">
+            Este campo es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]='EncargadoRecepcion'>Agregar Encargado de Recepcion</mat-checkbox>
+        <mat-form-field *ngIf="EncargadoRecepcion === true">
+           <input matInput type="text" [formControl]="encargadoRecepcionFormControl" [(ngModel)]="encargadoRecepcion" required placeholder="Nombre del Encargado de Recepcion o Empresa ">
+           <mat-error *ngIf="encargadoRecepcionFormControl.hasError('required')">
+            Este campo es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>  
+    </div>
+    <div class="button-form">
+      <button mat-raised-button color="primary"  (click)="generar()" [disabled]="!notasFormControl.valid||(EncargadoEntrega === true&&!encargadoEntregaFormControl.valid)||(EncargadoRecepcion === true&&!encargadoRecepcionFormControl.valid)" >Generar Nota</button>
+    </div>
+      <div>
+        <button mat-button matStepperPrevious>Atras</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>

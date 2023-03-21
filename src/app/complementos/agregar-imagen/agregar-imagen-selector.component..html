@@ -1,0 +1,6 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<button  mat-raised-button color="primary" onclick="document.getElementById('custom-input').click()" *ngIf="!imageReturn">Seleccionar Archivo</button>
+<input  id="custom-input" type="file" accept="image/*" (change)="fileListener($event)" style="display:none">
+    <img [src]="imageReturn" (load)="onLoad()" *ngIf="imageReturn||loaded == true">
+
+   

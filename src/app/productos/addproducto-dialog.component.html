@@ -1,0 +1,3 @@
+<img-cropper #cropper [image]="data" [settings]="cropperSettings" (cropPositionChange)="cropPosition($event)"></img-cropper>
+<br>
+<button mat-button [mat-dialog-close]="result" cdkFocusInitial>Ok</button>

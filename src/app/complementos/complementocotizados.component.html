@@ -1,0 +1,5 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div class="data-table">
+    <input #search class="search" type="text" placeholder="Buscar..." (keydown.enter)="onSearch(search.value)">
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDelete($event)"></ng2-smart-table>
+</div>

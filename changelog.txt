@@ -1,0 +1,88 @@
+//0.49
+Productos
+    *Agregado Area para Productos
+    *Agregado Unidad sin Serie A Unidades en producto
+    *Modificado Pixelaje final
+    *Cambio de Garantia a droplist con meses
+    *Cambio de strings detecciond de minusculas e mayusculas a todo mayusculas
+Cotizacion:
+    *Agregadoo calculo de impuestos, utilidad, compras, credito fiscal
+    *Agregado Campos Dinamicos
+        *Agregado Cambio de Persona dirigida
+        *Agregado Cambio de # dias de entrega
+        *Agregado Cambio de Adelanto
+        *Agregado Fecha
+Notas de Entrega:
+    *Agregado de Campos dinamicos:
+        *Agregado notas
+        *Agregado recibido por:
+        *Agregado Entregado por:
+*Agregado Correccion de espacio para PDF (pasa a nueva pagina si la imagen esta en desorden)
+
+//0.48.1
+Correcciones:
+*Centreado de imagenes para Mostrador de productos
+*Centreado de texto para tablas
+*Agregado Lineas divisioras para filas en tablas
+*Se corrigio la lectura del ID para generacion de nota de entrega
+//0.48
+*Cambiado el sistema de modificacion de Empresas
+-*Se hace busquedas generales de empresas.
+-*Se permite edicion multiple de empresas.
+-*Se permite eliminacion de empresas. (Por ahora con alertas de confirmacion,posterior cambio a dialog o alarmas)
+-*Se tiene un Doble Search para filtrar la primera busqueda
+*Cambiado el sistema de modificaciones de Productos
+-*Se hace busquedas generales de productos
+-*Se permite edicion multiple de productos
+-*Se tiene un Doble Search para filtrar la primera busqueda
+-*Se permite edicion multiple de imagenes de productos (Guarda la edicion del producto al finalizar la edicion de imagen)
+-*Se permite eliminacion de productos.(Por ahora con alertas de confirmacion,posterior cambio a dialog o alarmas, no elimina la imagen)
+Correcciones
+*Correccion de error con nota de entrega, imprimia notas de entrega no correspondientes a la buscada
+*Correccion de edicion de notas de engrega, al finalizar la edicion retornaba a generar una nueva de entrega
+*Limpieza parcial de codigo extra en notas.
+*Correccion de colapso de nitro PDF, la version 11 de nitro PDF corrige el problema, aparentemente es problema de nitropdf
+*Limpieza de codigo y cambio de codigos en /routes/notas y routes/cotizaciones
+
+Bugs Conocidos:
+*No se limpio aun el codigo anterior de modificacion de productos o empresas.
+*Al querer cargar un archivo que no es imagen y posteriormente reintentar la subida y cancelar se queda en un bucle infinito al querer comprimir los archivos (revisar el err correspondiente y no dejar escribir nada),
+*En celular no se observa los botones correspondientes para poder editar cotizaciones o generar notas de entrega (Se require agregar formatos responsives al css)
+*En firefox no funciona la generacion de PDF ni la descarga del mismo, revisar webkit o compatibilidad de pdfMake o comptabilidad de anchors o blobs para firefox
+
+//0.47.1
+*Agregado Unidades a productos
+*Agregado Loader para carga de productos y empresas
+*Agregado Loader para carga de imagenes
+*Agregado limitador de tipo de archivos para subida de archivos (imagenes esta como primero pero permite meter otros archivos)
+*Agregado matcher para eliminacion de codigo inserterio para imagenes de productos
+
+Correciones
+*Limpieza parcial de codigo (/routes/), cambio de codigo para edicion de cotizacion y agregacion de notas
+*Correccion de Edicion de cotizaciones, No editaba la cotizacion correcta
+*Correcion de Edicion de notas, No obtenia datos de los numerors de series ya expuestos anteriormente
+
+Bugs Conocidos
+*Al querer cargar un archivo que no es imagen y posteriormente reintentar la subida y cancelar se queda en un bucle infinito al querer comprimir los archivos (revisar el err correspondiente y no dejar escribir nada),
+*En celular no se observa los botones correspondientes para poder editar cotizaciones o generar notas de entrega (Se require agregar formatos responsives al css)
+*En firefox no funciona la generacion de PDF ni la descarga del mismo, revisar webkit o compatibilidad de pdfMake o comptabilidad de anchors o blobs para firefox
+*En nitro PDF el pdf generado colapsa la RAM al 99% revisar conceptos de pdf dinamicos.
+
+
+//0.47
+Correcciones
+*Limpieza parcial de codigo (src/app/ordenes)
+*Limpieza de @Inputs, agrupacion en objetos (src/app/ordenes)
+*Correccion de botones en edicion de cotizaciones y notas (cuando presionaba atras no reconocia la nueva pulsacion y quedaba con los datos anteriores)
+*Agregado Eliminar cotizacion (desactivado por codigo, Aun esta en tratativas para ver si se integrara al codigo)
+
+Bugs Conocidos
+*No se tiene unidades para los productos, esto afecta a productos de venta por metro, ocasiona q la nota de entrega genere 150 productos para los numeros de serie (corregir con seleccion de unidad al agregar productos, esto servira posteriormente para almacen)
+*En altas latencia el front end no reconoce la pulsacion, esto genera que el usuario agregue doblemente empresas (corregir con un postdialog a la respuesta del POST de guardado en la base de datos)
+*Lo mismo de anterior pero para productos(Misma correccion q empresas)
+*Al modificar producto y no modificar la imagen se guarda en blanco la imagen (corregir con un GET srcImg para llamar la imagen y q la reguarde)
+
+//0.46.1
+* Arreglo de problemas con relaciones de Cotizaciones y Notas para edicion de Notas y cotizaciones
+* Cambio de generacion de notas de entrega para relaciones de notas de entrega y cotizaciones
+* Inicio de uso de changelogs para las versiones.

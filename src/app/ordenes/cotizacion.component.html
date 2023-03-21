@@ -1,0 +1,74 @@
+<section class="mat-typography">
+  <h1>Editar Cotizaciones</h1>
+</section>
+<mat-horizontal-stepper [linear]="isLinear" id="stepper">
+    <mat-step label="Buscar Empresa" [completed]="step1Completed">
+      <app-empresas [accion]="cotizacion.accion" (notaClick)='onNotaClick($event)'></app-empresas>
+        <app-datepicker></app-datepicker>
+
+        <div>
+        </div>      
+    </mat-step>
+    <mat-step [completed]="step2Completed" >
+      <form>
+        <ng-template matStepLabel>Editar Productos</ng-template>
+        <div *ngIf="cotizacion.ID">
+          <app-productos [cotizacion]="cotizacion" (productosForm)='onProductosForm($event)'></app-productos>
+        </div>
+        <div class="movimientoAtrasAdelante">
+          <button mat-button matStepperPrevious (click)="retroceder()">Atras</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Cotizar</ng-template>
+      <div class="panel panel-default">
+        <mat-form-field>
+          <input matInput [formControl]="notasFormControl" type="text" placeholder="Notas" [(ngModel)]="notas" name="notas" required>
+          <mat-error *ngIf="notasFormControl.hasError('required')">
+            Este campo es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]='modificacionEncargado'>Modificacion de Persona dirigida</mat-checkbox>
+        <mat-form-field *ngIf="modificacionEncargado === true">
+          <input matInput [formControl]="encargadoFormControl" type="text" [(ngModel)]="encargadoModificado" placeholder="Nombre de la nueva persona dirigida" required >
+          <mat-error *ngIf="encargadoFormControl.hasError('required')">
+            Este campo es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]='modificacionDiasEntrega'>Modificacion de Dias para entrega</mat-checkbox>
+        <mat-form-field *ngIf="modificacionDiasEntrega === true">
+           <input matInput type="number" [formControl]="diasFormControl" [(ngModel)]="diasEntregaModificado" required placeholder="Tiempo de entrega para esta cotizacion" min="1" step="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+           <mat-error *ngIf="diasFormControl.hasError('required')">
+            Este campo es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+    <mat-checkbox [(ngModel)]='modificacionAdelanto'>Modificacion de % de Adelanto</mat-checkbox>
+    <mat-form-field *ngIf="modificacionAdelanto === true" >
+      <input matInput type="number"  [(ngModel)]="adelantoModificado" required placeholder="Porcentaje de adelanto Requerido" [formControl]="adelantoFormControl" >
+      <mat-error *ngIf="adelantoFormControl.hasError('required')">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+      <mat-error *ngIf="adelantoFormControl.hasError('validPorcentaje')">
+        Este campo tiene que ser menor a <strong>100</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="dp" placeholder="Fecha de cotizacion" [(ngModel)]="creado._d" (dateChange)='nuevaFecha($event)'>
+      <mat-error *ngIf="creado.valid === false">
+          Este campo es <strong>requerido</strong> y tiene que tener un formato correcto <strong>dd/mm/aaaa</strong>
+        </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp></mat-datepicker>
+      
+    </mat-form-field>
+    </div>
+    <div class="button-form">
+      <button mat-raised-button color="primary"  (click)="cotizar()" [disabled]="!notasFormControl.valid||(modificacionAdelanto === true&&!adelantoFormControl.valid)||(modificacionDiasEntrega === true&&!diasFormControl.valid)||(modificacionEncargado === true&&!encargadoFormControl.valid||!creado.valid)">Cotizar</button>
+    </div>
+      <div>
+        <button mat-button matStepperPrevious>Atras</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>

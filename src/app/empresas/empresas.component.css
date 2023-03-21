@@ -1,0 +1,58 @@
+.panel-default {
+  display: flex;
+  flex-direction: column;
+  padding-top:5%
+}
+
+.panel-default > * {
+  width: 50%;
+  align-self:center;
+
+}
+.amount-right-align {
+  text-align: right;
+}
+img {
+  max-height: 64px
+}
+:host /deep/ .tableColumn{
+  text-align: center
+}
+.form-full-width{
+  min-width: 70vh
+}
+  :host /deep/ ng2-smart-table {
+    font-size:16px;
+    text-align: center}
+  :host /deep/ ng2-smart-table th a {color: white;
+
+   }
+  :host /deep/ ng2-smart-table thead {background-color: orange; }
+  :host /deep/ ng2-smart-table td a { color: orange; }
+  :host /deep/ ng2-smart-table td{border-bottom:1px  solid grey }
+  :host /deep/ .image-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+  :host /deep/ .descripcion_Data{
+    text-align: justify;
+    text-justify: inter-word;
+  }
+ 
+.total{
+  background: rgba(255, 157, 0, 0.918);
+  color: white;
+  font-weight: bold;
+  width:15%;
+  padding:1%;
+  height:20%;
+  margin-top:2%;
+  border-radius: 0px 0px 25px 25px;
+  margin-left:auto;
+}
+
+.button-form{
+  text-align: center
+}

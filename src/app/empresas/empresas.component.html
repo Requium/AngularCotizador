@@ -1,0 +1,44 @@
+<div *ngIf="!accion" class="panel panel-default">
+  <form>
+    <mat-form-field class="form-full-width">
+      <input matInput placeholder="Empresas a Buscar" name="buscador" [(ngModel)]="busqueda" class="autocomplete">
+    </mat-form-field>  
+    <div class="button-form">
+      <button mat-raised-button color="primary" (click)="mostrarEmpresas()" >Mostrar</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="accion" class="panel panel-default">
+  <form >
+    <mat-form-field class="form-full-width">
+      <input matInput placeholder="Empresa a Buscar" aria-label="Empresa" [matAutocomplete]="auto" [formControl]="stateCtrl" required class="autocomplete">
+        </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let cliente of filteredClientes | async" (onSelectionChange)="selectEmpresa(cliente)" [value]="cliente.nombre">
+          <span>{{cliente.nombre }}</span> |
+          <small>{{cliente.encargado}}</small> |
+          <small>{{cliente.telefono}}</small>
+        
+        </mat-option>
+ 
+
+      </mat-autocomplete>
+      
+    <br />
+
+
+</form>
+</div>
+<hr>
+<div *ngIf="!accion&&dataEmpresas"> 
+  <app-buscador-empresas [empresas]="dataEmpresas"></app-buscador-empresas>
+</div>
+<span class="panel panel-default" *ngIf="selectedEmpresa.nombre && accion === 'cotizacion'" >
+
+  <app-addempresas [empresa]="selectedEmpresa" (validForm)='onValid($event)'></app-addempresas>
+</span>
+<span  *ngIf="selectedEmpresa.accion && selectedEmpresa.accion !== 'cotizacion'">
+  <app-complementocotizados [empresa]="selectedEmpresa" (notaClick)='onNotaClick($event)'></app-complementocotizados>
+</span>
+
